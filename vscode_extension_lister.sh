@@ -1,3 +1,3 @@
 #!/bin/bash
 
-code --list-extensions
+code --list-extensions | tee ./out/code_extensions.txt
