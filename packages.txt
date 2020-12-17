@@ -1,0 +1,60 @@
+Snap installation steps
+sudo pacman -Su snapd
+sudo systemctl enable --now snapd.socket
+for classic:
+sudo ln -s /var/lib/snapd/snap /snap
+
+
+Installations
+snapd | pacman
+Anaconda | Shell script from the site
+Code OSS | pacman
+rustup | pacman
+Kdiff3 | pacman
+Python | in-built, pacman
+gcc | in-built, pacman
+wireshark-qt | pacman
+Spotify | snap
+Arduino | pacman
+git | in-built, pacman
+cairo-dock | pacman
+opencv | pacman
+cmake | pacman
+wireshark-cli, wireshark-qt | pacman
+nodejs | pacman
+gvim, vim, nvim | pacman -> https://rmaicle.github.io/posts/NgVX8g15ZMd29wZ/index
+powerline | pacman
+source_code_pro | pacman
+fzf, ack, grep | pacman
+clangd | pacman
+ranger | paman
+zsh | pacman
+albert | pacman
+obsidian | AUR
+
+Python packages
+TMPDIR=%tempdir% pip install --no-cache-dir -build %tempdir% package_1 package_2 ... package_2
+pylint
+numpy
+scipy
+tensorflow
+scikit-learn
+pandas
+matplotlib
+conan
+lizard
+
+Code extensions
+C/C++
+Python
+Rust
+Cobalt2
+Arduino
+Python Docstring Generator
+CMake
+Cmake Tools
+x86 and x86_64 Assembly
+VS Intellicode
+Code Spell Checker
+JS and TS
+VSCodeVim
