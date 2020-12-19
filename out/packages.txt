@@ -1,9 +1,3 @@
-Snap installation steps
-sudo pacman -Su snapd
-sudo systemctl enable --now snapd.socket
-for classic:
-sudo ln -s /var/lib/snapd/snap /snap
-
 
 Installations
 snapd | pacman
