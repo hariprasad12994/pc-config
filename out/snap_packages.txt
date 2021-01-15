@@ -1,4 +1,4 @@
 Name     Version               Rev    Tracking       Publisher   Notes
-core     16-2.48               10577  latest/stable  canonical*  core
+core     16-2.48.2             10583  latest/stable  canonical*  core
 core18   20201210              1944   latest/stable  canonical*  base
 spotify  1.1.46.916.g416cacf1  43     latest/stable  spotify*    -
