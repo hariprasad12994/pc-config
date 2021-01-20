@@ -8,6 +8,7 @@ cppcheck
 cscope
 ctags
 firejail
+firetools
 fzf
 google-chrome
 gtest
