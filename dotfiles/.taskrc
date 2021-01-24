@@ -1,0 +1,85 @@
+# [Created by task 2.5.1 1/7/2021 21:11:23]
+# Taskwarrior program configuration file.
+
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+data.location=~/.task
+
+# Reports
+report.someday.description='Initial report'
+report.someday.columns=id,depends.list,area,project,description.count,urgency,relatedprj
+report.someday.labels=Id,DependsOn,Area,Project,Description,Urg,Related
+report.someday.sort=area+/,project+/,urgency-,entry+
+report.someday.filter=status:pending and folder:someday
+
+report.next.description='Initial report'
+report.next.columns=id,depends.list,area,project,description.count,urgency,relatedprj
+report.next.labels=Id,DependsOn,Area,Project,Description,Urg,Related
+report.next.sort=area+/,project+/,urgency-,entry+
+report.next.filter=status:pending and folder:next
+
+report.pending.description='Initial report'
+report.pending.columns=id,depends.list,project,description.count,tags,urgency
+report.pending.labels=Id,DependsOn,Project,Description,Tag,Urg
+report.pending.sort=project+/,urgency-,entry+
+report.pending.filter=status:pending
+
+report.completed.description='Initial report'
+report.completed.columns=area,project,description.desc
+report.completed.labels=Area,Project,Description
+report.completed.sort=area+/,project+/,entry+
+report.completed.filter=status:completed
+
+# User defined attributes
+uda.area.type=string
+uda.area.label=Area
+
+uda.folder.type=string
+uda.folder.label=List
+uda.folder.values=next,someday
+
+uda.relatedprj.type=string
+uda.relatedprj.label=Related Project
+
+# Urgency overrides and customisation
+urgency.age.coefficient=0.5
+urgency.tags.coefficient=0.0
+urgency.uda.area.finance.coefficient=2.0
+urgency.uda.folder.someday.coefficient=-2.0
+urgency.uda.folder.next.coefficient=1.0
+
+# Color theme (uncomment one to use)
+#include /usr/share/doc/task/rc/light-16.theme
+#include /usr/share/doc/task/rc/light-256.theme
+#include /usr/share/doc/task/rc/dark-16.theme
+#include /usr/share/doc/task/rc/dark-256.theme
+#include /usr/share/doc/task/rc/dark-red-256.theme
+#include /usr/share/doc/task/rc/dark-green-256.theme
+#include /usr/share/doc/task/rc/dark-blue-256.theme
+include /usr/share/doc/task/rc/dark-violets-256.theme
+#include /usr/share/doc/task/rc/dark-yellow-green.theme
+#include /usr/share/doc/task/rc/dark-gray-256.theme
+#include /usr/share/doc/task/rc/dark-gray-blue-256.theme
+#include /usr/share/doc/task/rc/solarized-dark-256.theme
+#include /usr/share/doc/task/rc/solarized-light-256.theme
+#include /usr/share/doc/task/rc/no-color.theme
+rule.precedence.color=blocking,urgency,age,blocking
+
+# Context to filter the tasks at area of focus level
+context.finance=area:Finance
+context.sideprojects=area:Side Projects
+context.reading=area:Reading
+context.health=area:Health
+context.hobbies=area:Hobbies
+context.errands=area:Errands
+context.chores=area:Chores
+context.career=area:Career
+context.recreation=area:Recreation
+context.experiment=area:Experiments
+context.review=area:Review
+context.familty=area:Family
+context.productivity=area:Productivity
+# Context to filter the tasks at time scale level
+context.nextactions=folder:next
+context.someday=folder:someday
