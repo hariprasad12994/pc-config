@@ -64,7 +64,7 @@ include /usr/share/doc/task/rc/dark-violets-256.theme
 #include /usr/share/doc/task/rc/solarized-dark-256.theme
 #include /usr/share/doc/task/rc/solarized-light-256.theme
 #include /usr/share/doc/task/rc/no-color.theme
-rule.precedence.color=blocking,urgency,age,blocking
+rule.precedence.color=blocking,urgency,age,blocked
 
 # Context to filter the tasks at area of focus level
 context.finance=area:Finance
