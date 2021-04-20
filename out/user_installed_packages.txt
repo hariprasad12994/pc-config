@@ -1,5 +1,4 @@
 ack
-albert
 arduino
 clamav
 clang
@@ -10,6 +9,7 @@ ctags
 firejail
 firetools
 fzf
+gnucash
 google-chrome
 gtest
 jre11-openjdk
@@ -20,16 +20,19 @@ lib32-vulkan-radeon
 libreoffice-still
 linux59-rt
 linux59-rt-broadcom-wl
+lutris
 net-tools
 nmap
 npm
 opencv
+pandoc
 plantuml
 powerline
 qemu
 ranger
 remmina
 rkhunter
+rofi
 rustup
 task
 tigervnc
@@ -37,5 +40,8 @@ timew
 tmux
 vulkan-intel
 vulkan-radeon
+wine
+wine-gecko
+wine-mono
 wireshark-qt
 xkcdpass
