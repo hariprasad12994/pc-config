@@ -1,5 +1,6 @@
 ack
 arduino
+bspwm
 clamav
 clang
 code
@@ -8,6 +9,7 @@ cscope
 ctags
 firejail
 firetools
+foliate
 fzf
 gnucash
 google-chrome
@@ -34,6 +36,8 @@ remmina
 rkhunter
 rofi
 rustup
+stow
+sxhkd
 task
 tigervnc
 timew
