@@ -163,6 +163,16 @@ let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 let g:ycm_clangd_binary_path = "usr/bin/clangd"
 
 " Macros
+" Initiate a numbered list starting from 1.
 let @a="^i1. \<Esc>k"
+" Complete a numbered list until given number. Use in conjuction with @a. 
+" For example use @a6@n to create a numbered list of 1 till 6
 let @n="^i\<C-y>\<C-y>\<C-y>\<Esc>^\<C-a>k"
-
+" Convert current line into checklist
+let @c="^i[]  \<Esc>"
+" Mark a check list item as complete
+" todo :  What if the macro is used on the line which is not a checklist entry
+let @d="^lix\<Esc>"
+" Mark a check list item as incomplete
+" todo: What if the macro is used on the which is not a checklist entry
+let @u="^lx\<Esc>"

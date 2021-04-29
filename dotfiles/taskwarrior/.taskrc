@@ -7,25 +7,25 @@
 data.location=~/.task
 
 # Reports
-report.someday.description='Initial report'
+report.someday.description='Tasks which be done someday in future'
 report.someday.columns=id,depends.list,area,project,description.count,urgency,relatedprj
 report.someday.labels=Id,DependsOn,Area,Project,Description,Urg,Related
 report.someday.sort=area+/,project+/,urgency-,entry+
-report.someday.filter=status:pending and folder:someday
+#report.someday.filter=status:pending and folder:someday
 
-report.next.description='Initial report'
+report.next.description='Upcoming tasks'
 report.next.columns=id,depends.list,area,project,description.count,urgency,relatedprj
 report.next.labels=Id,DependsOn,Area,Project,Description,Urg,Related
 report.next.sort=area+/,project+/,urgency-,entry+
-report.next.filter=status:pending and folder:next
+#report.next.filter=status:pending and folder:next
 
-report.pending.description='Initial report'
+report.pending.description='Pending tasks'
 report.pending.columns=id,depends.list,project,description.count,tags,urgency
 report.pending.labels=Id,DependsOn,Project,Description,Tag,Urg
 report.pending.sort=project+/,urgency-,entry+
 report.pending.filter=status:pending
 
-report.completed.description='Initial report'
+report.completed.description='Completed tasks'
 report.completed.columns=area,project,description.desc
 report.completed.labels=Area,Project,Description
 report.completed.sort=area+/,project+/,entry+
@@ -35,9 +35,6 @@ report.completed.filter=status:completed
 uda.area.type=string
 uda.area.label=Area
 
-uda.folder.type=string
-uda.folder.label=List
-uda.folder.values=next,someday
 
 uda.relatedprj.type=string
 uda.relatedprj.label=Related Project
@@ -46,8 +43,8 @@ uda.relatedprj.label=Related Project
 urgency.age.coefficient=0.5
 urgency.tags.coefficient=0.0
 urgency.uda.area.finance.coefficient=2.0
-urgency.uda.folder.someday.coefficient=-2.0
-urgency.uda.folder.next.coefficient=1.0
+#urgency.uda.folder.someday.coefficient=-2.0
+#urgency.uda.folder.next.coefficient=1.0
 
 # Color theme (uncomment one to use)
 #include /usr/share/doc/task/rc/light-16.theme
@@ -81,5 +78,5 @@ context.review=area:Review
 context.familty=area:Family
 context.productivity=area:Productivity
 # Context to filter the tasks at time scale level
-context.nextactions=folder:next
-context.someday=folder:someday
+#context.nextactions=folder:next
+#context.someday=folder:someday

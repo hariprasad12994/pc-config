@@ -158,3 +158,5 @@ POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 . /usr/share/powerline/bindings/bash/powerline.sh
 LS_COLORS="$LS_COLORS:di=1;33"
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
