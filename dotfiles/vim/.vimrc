@@ -146,11 +146,20 @@ Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/weirongxu/plantuml-previewer.vim'
 Plug 'https://github.com/tyru/open-browser.vim'
 Plug 'https://github.com/aklt/plantuml-syntax'
+Plug 'https://github.com/sainnhe/edge'
 Plug 'https://github.com/arcticicestudio/nord-vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'https://github.com/sirtaj/vim-openscad'
+Plug 'bluz71/vim-nightfly-guicolors'
 call plug#end()
 
-colorscheme monokai-phoenix
+"colorscheme monokai-phoenix
+if has('termguicolors')
+  set termguicolors
+endif
+let g:edge_style = 'aura'
+let g:edge_better_performance = 1
+colorscheme edge
 set background=dark
 
 " Toggle the nerdtree on hitting Ctrl+E
