@@ -24,8 +24,9 @@ vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', {})
 vim.keymap.set({'n', 'v', 's', 'x'}, 'j', 'k', { noremap = true })
 vim.keymap.set({'n', 'v', 's', 'x'}, 'k', 'j', { noremap = true })
 -- Basic clipboard interaction
-vim.keymap.set({'n', 'x'}, 'cp', '"+y', {})
-vim.keymap.set({'n', 'x'}, 'cv', '"+p', {})
+-- prerequisite - install xclip, tmux
+vim.keymap.set({'n', 'x'}, '<leader>y', '"+y', {})
+vim.keymap.set({'n', 'x'}, '<leader>p', '"+p', {})
 -- Keybinding for toggling relative numbering
 vim.keymap.set({'n', 'x', 'v', 's'}, '<leader>l', ":set invrelativenumber<cr>", { noremap = true})
 -- Keybinding for switching tabs
