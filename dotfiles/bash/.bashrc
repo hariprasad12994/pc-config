@@ -138,21 +138,6 @@ ex ()
   fi
 }
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/hari/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/hari/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/hari/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/hari/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
@@ -160,3 +145,5 @@ POWERLINE_BASH_SELECT=1
 LS_COLORS="$LS_COLORS:di=1;33"
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+. "$HOME/.cargo/env"
