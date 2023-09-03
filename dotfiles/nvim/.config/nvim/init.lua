@@ -25,8 +25,8 @@ vim.keymap.set({'n', 'v', 's', 'x'}, 'j', 'k', { noremap = true })
 vim.keymap.set({'n', 'v', 's', 'x'}, 'k', 'j', { noremap = true })
 -- Basic clipboard interaction
 -- prerequisite - install xclip, tmux
-vim.keymap.set({'n', 'x'}, '<leader>y', '"+y', {})
-vim.keymap.set({'n', 'x'}, '<leader>p', '"+p', {})
+vim.keymap.set({'n', 'x', 'v'}, '<leader>y', '"+y', {})
+vim.keymap.set({'n', 'x', 'v'}, '<leader>p', '"+p', {})
 -- Keybinding for toggling relative numbering
 vim.keymap.set({'n', 'x', 'v', 's'}, '<leader>l', ":set invrelativenumber<cr>", { noremap = true})
 -- Keybinding for switching tabs
@@ -72,6 +72,8 @@ require('packer').startup(function(use)
   }
   use {
     'nvim-telescope/telescope.nvim',
+    tag = '0.1.2',
+    branch = '0.1.x',
     requires = {
       'nvim-lua/plenary.nvim',
       'BurntSushi/ripgrep'
