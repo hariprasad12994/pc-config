@@ -91,6 +91,7 @@ require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter'
   }
+  use { 'cohama/lexima.vim' }
   use { 'kylechui/nvim-surround' }
   use { 'folke/trouble.nvim' }
   use { 'akinsho/bufferline.nvim' }
@@ -322,3 +323,9 @@ local function auto_update_path()
 end
 
 vim.keymap.set('n', '<leader>se', auto_update_path, { desc = '[S]ync [E]xplorer' })
+
+
+vim.fn['lexima#add_rule']({char='<', at="template\\s*\\%#", input_after='>', filetype='cpp'})
+vim.fn['lexima#add_rule']({char='>', at="\\%#>", leave=1, filetype='cpp'})
+
+
