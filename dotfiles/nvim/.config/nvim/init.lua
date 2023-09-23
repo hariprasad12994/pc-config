@@ -309,3 +309,16 @@ require('bufferline').setup()
 
 require('nvim-surround').setup()
 
+local function auto_update_path()
+  local buf = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(buf)
+  if vim.fn.isdirectory(bufname) or vim.fn.isfile(bufname) then
+    if not require("nvim-tree.view").is_visible() then
+      vim.api.nvim_input('<C-e>')
+    end
+    require("nvim-tree.api").tree.find_file(vim.fn.expand("%:p"))
+    vim.api.nvim_input('<C-h>')
+  end
+end
+
+vim.keymap.set('n', '<leader>se', auto_update_path, { desc = '[S]ync [E]xplorer' })
