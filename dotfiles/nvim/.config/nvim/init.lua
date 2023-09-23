@@ -14,7 +14,7 @@ vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldenable = false
 
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 
 -- Keybinding to source the vimrc file
 vim.keymap.set('n', '<leader>s', ':source $MYVIMRC<cr>', {})
