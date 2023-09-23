@@ -136,6 +136,19 @@ require('Comment').setup()
 
 require('nvim-tree').setup()
 vim.keymap.set({'n', 'v', 's', 'x'}, '<C-e>', "<cmd>NvimTreeToggle<cr>")
+local function auto_update_path()
+  local buf = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(buf)
+  if vim.fn.isdirectory(bufname) or vim.fn.isfile(bufname) then
+    if not require("nvim-tree.view").is_visible() then
+      vim.api.nvim_input('<C-e>')
+    end
+    require("nvim-tree.api").tree.find_file(vim.fn.expand("%:p"))
+    vim.api.nvim_input('<C-h>')
+  end
+end
+vim.keymap.set('n', '<leader>se', auto_update_path, { desc = '[S]ync [E]xplorer' })
+
 
 require('nvim-treesitter.configs').setup({
   ensure_installed = { 'c', 'cpp', 'python', 'json', 'lua', 'rust', 'vim' },
@@ -310,21 +323,7 @@ require('bufferline').setup()
 
 require('nvim-surround').setup()
 
-local function auto_update_path()
-  local buf = vim.api.nvim_get_current_buf()
-  local bufname = vim.api.nvim_buf_get_name(buf)
-  if vim.fn.isdirectory(bufname) or vim.fn.isfile(bufname) then
-    if not require("nvim-tree.view").is_visible() then
-      vim.api.nvim_input('<C-e>')
-    end
-    require("nvim-tree.api").tree.find_file(vim.fn.expand("%:p"))
-    vim.api.nvim_input('<C-h>')
-  end
-end
-
-vim.keymap.set('n', '<leader>se', auto_update_path, { desc = '[S]ync [E]xplorer' })
-
-
+-- Lexima auto pair custom rules for cpp templates
 vim.fn['lexima#add_rule']({char='<', at="template\\s*\\%#", input_after='>', filetype='cpp'})
 vim.fn['lexima#add_rule']({char='>', at="\\%#>", leave=1, filetype='cpp'})
 
