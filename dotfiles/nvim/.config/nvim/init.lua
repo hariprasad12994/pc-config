@@ -84,6 +84,7 @@ require('packer').startup(function(use)
     run = 'make',
     cond = vim.fn.executable 'make' == 1
   }
+  use { 'nvim-telescope/telescope-live-grep-args.nvim' }
   use { 'numToStr/Comment.nvim' }
   use { 'nvim-tree/nvim-tree.lua' }
   use { 'nvim-treesitter/nvim-treesitter' }
@@ -121,7 +122,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 vim.opt.termguicolors = true
 vim.opt.background = dark
-vim.cmd('colorscheme tokyonight-moon')
+vim.cmd('colorscheme tokyonight-night')
 
 vim.opt.showmode = false
 require('lualine').setup({
@@ -170,10 +171,11 @@ end
 normal_mode_map('<leader>ff', ":Telescope find_files<cr>")
 pcall(require('telescope').load_extension, 'fzf')
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [w]ord' })
-vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[L]ive [G]rep' })
+vim.keymap.set('n', '<leader>mlg', require('telescope.builtin').live_grep, { desc = '[M]nimal [L]ive [G]rep' })
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[B]uffer [L]ive [G]rep' })
 vim.keymap.set('n', '<leader>ls', require('telescope.builtin').treesitter, { desc = '[L]ist [S]symbol' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set("n", "<leader>lg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", { desc = '[L]ive [G]rep' })
 
 -- For debugging purposes, turn trace level LSP logging by uncommenting the following line
 -- vim.lsp.set_log_level('trace')
