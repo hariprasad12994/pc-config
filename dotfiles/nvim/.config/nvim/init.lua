@@ -91,6 +91,7 @@ require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter'
   }
+  use { 'kylechui/nvim-surround' }
   use { 'folke/trouble.nvim' }
   use { 'akinsho/bufferline.nvim' }
   use { 'nvim-lualine/lualine.nvim' }
@@ -305,4 +306,6 @@ vim.keymap.set('n', '<leader>xq', '<cmd>TroubleToggle quickfix<cr>', { silent = 
 vim.keymap.set('n', 'gR', '<cmd>TroubleToggle lsp_references<cr>', { silent = true, noremap = true })
 
 require('bufferline').setup()
+
+require('nvim-surround').setup()
 
