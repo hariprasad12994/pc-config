@@ -127,7 +127,7 @@ vim.cmd('colorscheme tokyonight-night')
 vim.opt.showmode = false
 require('lualine').setup({
   options = {
-    theme = 'onedark',
+    theme = 'dracula',
     icons_enabled = true,
     component_separators = '|',
     section_seperators = ''
