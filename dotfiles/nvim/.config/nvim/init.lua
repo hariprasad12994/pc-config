@@ -153,9 +153,22 @@ vim.keymap.set('n', '<leader>se', auto_update_path, { desc = '[S]ync [E]xplorer'
 
 
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { 'c', 'cpp', 'python', 'json', 'lua', 'rust', 'vim' },
+  ensure_installed = { 
+    'c', 
+    'cpp', 
+    'python', 
+    'json', 
+    'lua', 
+    'rust', 
+    'vim',
+    'tsx',
+    'toml',
+    'css',
+    'html'
+  },
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
+  autotag = { enable = true, disable = { 'python', 'c', 'cpp', 'rust' }}
 })
 
 -- Diagnostics keymaps
@@ -218,7 +231,8 @@ local language_servers = {
   },
   pyright = { cmd = {}, settings = {} },
   rust_analyzer = { cmd = {}, settings = {} },
-  jsonls = { cmd = {}, settings = {} }
+  jsonls = { cmd = {}, settings = {} },
+  tsserver = { cmd = { 'typescript-language-server', '--stdio' } }
 }
 
 -- nvim_cmp supports additional completion capabilities, so broadcast to servers
@@ -247,6 +261,14 @@ mason_lsp_config.setup_handlers {
       on_attach = on_attach,
       cmd = language_servers['clangd']['cmd'],
       settings = language_servers['clangd']['settings']
+    }
+  end,
+  ['tsserver'] = function ()
+    require('lspconfig')['tsserver'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = language_servers['tsserver']['settings'],
+      filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' }
     }
   end
 }
