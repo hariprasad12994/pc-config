@@ -92,6 +92,10 @@ require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter'
   }
+  use {
+    'nvim-treesitter/nvim-treesitter-context',
+    tag = 'compat/0.7'
+  }
   use { 'cohama/lexima.vim' }
   use { 'kylechui/nvim-surround' }
   use { 'folke/trouble.nvim' }
@@ -115,14 +119,14 @@ end
 -- Automatically source and recompile packer whenever init.lua is saved
 local packer_group = vim.api.nvim_create_augroup( 'Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source<afile> | PackerSync',
+  command = 'source <afile> | PackerSync',
   group = packer_group,
   pattern = vim.fn.expand '$MYVIMRC'
 })
 
 vim.opt.termguicolors = true
 vim.opt.background = dark
-vim.cmd('colorscheme tokyonight-night')
+vim.cmd('colorscheme tokyonight-moon')
 
 vim.opt.showmode = false
 require('lualine').setup({
@@ -157,11 +161,13 @@ require('nvim-treesitter.configs').setup({
     'c', 
     'cpp', 
     'python', 
-    'json', 
-    'lua', 
     'rust', 
-    'vim',
+    'zig',
+    'haskell',
     'tsx',
+    'lua', 
+    'vim',
+    'json', 
     'toml',
     'css',
     'html'
@@ -232,7 +238,8 @@ local language_servers = {
   pyright = { cmd = {}, settings = {} },
   rust_analyzer = { cmd = {}, settings = {} },
   jsonls = { cmd = {}, settings = {} },
-  tsserver = { cmd = { 'typescript-language-server', '--stdio' } }
+  tsserver = { cmd = { 'typescript-language-server', '--stdio' } },
+  zls = { cmd = {}, settings = {} }
 }
 
 -- nvim_cmp supports additional completion capabilities, so broadcast to servers
