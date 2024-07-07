@@ -1,0 +1,1 @@
+sudo dd if=/home/hari/prev_backup/manjaro-xfce-24.0.3-240702-linux69.iso of=/dev/sdb bs=1M status=progress
