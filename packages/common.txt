@@ -1,0 +1,29 @@
+# Packages with identical names on Arch/Manjaro and Ubuntu/Debian
+
+# Shell
+zsh
+tmux
+
+# Editors
+vim
+
+# CLI utilities
+fzf
+ranger
+tree
+htop
+xclip
+wget
+rsync
+stow
+
+# Dev
+git
+make
+cmake
+gcc
+npm
+
+# Task management
+taskwarrior
+timewarrior

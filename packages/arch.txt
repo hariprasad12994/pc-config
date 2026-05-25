@@ -1,0 +1,11 @@
+# Arch/Manjaro-only packages — different name or install source vs Ubuntu
+# See packages/common.txt for packages shared with Ubuntu
+
+# neovim: current version available in pacman (Ubuntu's apt version is outdated)
+neovim
+
+# github CLI (Arch package name; Ubuntu uses 'gh')
+github-cli
+
+# rustup: available in official Arch repos (Ubuntu installs via rustup.rs script)
+rustup

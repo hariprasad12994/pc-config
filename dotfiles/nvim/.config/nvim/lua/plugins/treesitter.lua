@@ -5,7 +5,7 @@ local M = {
   },
   branch = 'main',
   lazy = false,
-  build = 'TSUpdate',
+  build = ':TSUpdate',
   config = function()
     local treesitter = require('nvim-treesitter')
     treesitter.install({
