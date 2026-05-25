@@ -7,7 +7,8 @@ Uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs into `$HO
 
 ```
 pc-config/
-├── install.sh          # Bootstrap script — installs packages and stows dotfiles
+├── install.sh          # Bootstrap script — installs packages and oh-my-zsh (one-time)
+├── stow.sh             # Symlinks dotfiles into $HOME via GNU Stow (run any time)
 ├── packages/
 │   ├── common.txt      # Packages with identical names on Arch and Ubuntu
 │   ├── arch.txt        # Arch/Manjaro-only packages
@@ -32,8 +33,8 @@ pc-config/
 ```sh
 git clone --recurse-submodules git@github.com:hariprasad12994/pc-config.git ~/code/pc-config
 cd ~/code/pc-config
-bash install.sh          # CLI tools only
-GUI=1 bash install.sh    # CLI + GUI tools (rofi, etc.)
+bash install.sh          # install packages + oh-my-zsh (one-time; GUI=1 for GUI tools)
+bash stow.sh             # symlink dotfiles into $HOME (GUI=1 to include rofi)
 ```
 
 After running, set zsh as default shell:
@@ -53,7 +54,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting \
 
 ## Stow reference
 
-All commands run from the repo root.
+Use `stow.sh` for everyday operations, or the raw stow commands below for targeting individual packages. All commands run from the repo root.
 
 | Task | Command |
 |---|---|
@@ -73,7 +74,7 @@ All commands run from the repo root.
    ```sh
    stow --dir=dotfiles --target=$HOME myapp
    ```
-3. Add the package name to `CLI_PACKAGES` or `GUI_PACKAGES` in `install.sh`.
+3. Add the package name to `CLI_PACKAGES` or `GUI_PACKAGES` in `stow.sh`.
 
 ## Exporting current package state
 
