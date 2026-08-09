@@ -14,11 +14,16 @@ for pkg in $STOW_PACKAGES; do
     pkg_dir="$DOTFILES_DIR/$pkg"
     [ -d "$pkg_dir" ] || continue
 
-    # Back up any real files that would conflict with stow targets
+    # Back up any real files that would conflict with stow targets.
+    # Compare resolved paths rather than testing "-L $target": when a parent
+    # dir got tree-folded into a single symlink by a prior stow run, $target
+    # is already the repo file (reached through that symlink) even though
+    # its own path isn't a symlink - treating it as a conflict would mv the
+    # tracked repo file itself into a .bak.
     while IFS= read -r -d '' src; do
         rel="${src#$pkg_dir/}"
         target="$HOME/$rel"
-        if [ -e "$target" ] && [ ! -L "$target" ]; then
+        if [ -e "$target" ] && [ "$(readlink -f -- "$target")" != "$(readlink -f -- "$src")" ]; then
             echo "Backing up $target -> $target.bak"
             mv "$target" "$target.bak"
         fi
