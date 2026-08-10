@@ -19,7 +19,10 @@ local M = {
       'rust',
       'zig',
       'haskell',
-      'csv'
+      'csv',
+      'typescript',
+      'tsx',
+      'javascript'
     })
   end,
 }
