@@ -1,0 +1,145 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [],
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{a089879d-5ff6-5002-8f2d-0488b606f4cb}",
+    "keybindings": 
+    [
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+v"
+        },
+        {
+            "id": "Terminal.DuplicatePaneAuto",
+            "keys": "alt+shift+d"
+        }
+    ],
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "colorScheme": "One Half Dark",
+            "font": 
+            {
+                "face": "SauceCodePro Nerd Font",
+                "size": 9
+            }
+        },
+        "list": 
+        [
+            {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "colorScheme": "One Half Dark",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "font": 
+                {
+                    "face": "SauceCodePro Nerd Font",
+                    "size": 11
+                },
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "Command Prompt"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "colorScheme": "Gruvbox Dark",
+                "cursorHeight": 23,
+                "cursorShape": "vintage",
+                "font":
+                {
+                    "builtinGlyphs": false,
+                    "face": "SauceCodePro Nerd Font",
+                    "size": 9,
+                    "weight": "normal"
+                },
+                "guid": "{a089879d-5ff6-5002-8f2d-0488b606f4cb}",
+                "hidden": false,
+                "name": "ubuntu_24_04",
+                "source": "Microsoft.WSL"
+            },
+            {
+                "guid": "{fa914f80-6a0a-5277-b8e5-93b28a145716}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{de1169cb-e83a-5100-9410-f260b2782f20}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            }
+        ]
+    },
+    "schemes": [
+        {
+            "name": "Gruvbox Dark",
+            "background": "#282828",
+            "foreground": "#ebdbb2",
+            "black": "#282828",
+            "red": "#cc241d",
+            "green": "#98971a",
+            "yellow": "#d79921",
+            "blue": "#458588",
+            "purple": "#b16286",
+            "cyan": "#689d6a",
+            "white": "#a89984",
+            "brightBlack": "#928374",
+            "brightRed": "#fb4934",
+            "brightGreen": "#b8bb26",
+            "brightYellow": "#fabd2f",
+            "brightBlue": "#83a598",
+            "brightPurple": "#d3869b",
+            "brightCyan": "#8ec07c",
+            "brightWhite": "#ebdbb2",
+            "cursorColor": "#ebdbb2",
+            "selectionBackground": "#928374"
+        },
+        {
+            "name": "Tokyo Night Moon",
+            "background": "#222436",
+            "foreground": "#c8d3f5",
+            "black": "#1b1d2b",
+            "red": "#ff757f",
+            "green": "#c3e88d",
+            "yellow": "#ffc777",
+            "blue": "#82aaff",
+            "purple": "#c099ff",
+            "cyan": "#86e1fc",
+            "white": "#828bb8",
+            "brightBlack": "#444a73",
+            "brightRed": "#ff757f",
+            "brightGreen": "#c3e88d",
+            "brightYellow": "#ffc777",
+            "brightBlue": "#82aaff",
+            "brightPurple": "#fca7ea",
+            "brightCyan": "#86e1fc",
+            "brightWhite": "#c8d3f5",
+            "cursorColor": "#c8d3f5",
+            "selectionBackground": "#2d3f76"
+        }
+    ],
+    "themes": []
+}

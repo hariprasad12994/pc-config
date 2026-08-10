@@ -9,6 +9,7 @@ Uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs into `$HO
 pc-config/
 ├── install.sh          # Bootstrap script — installs packages and oh-my-zsh (one-time)
 ├── stow.sh             # Symlinks dotfiles into $HOME via GNU Stow (run any time)
+├── windows-terminal.sh # WSL only: symlinks Windows Terminal's settings.json into the repo
 ├── packages/
 │   ├── common.txt      # Packages with identical names on Arch and Ubuntu
 │   ├── arch.txt        # Arch/Manjaro-only packages
@@ -21,7 +22,8 @@ pc-config/
 │   ├── tmux/           # → ~/.config/tmux/
 │   ├── rofi/           # → ~/.config/rofi/
 │   ├── taskwarrior/    # → ~/.taskrc
-│   └── timewarrior/    # → ~/.timewarrior/
+│   ├── timewarrior/    # → ~/.timewarrior/
+│   └── windows-terminal/ # → Windows Terminal settings.json (WSL only, see windows-terminal.sh)
 ├── scripts/            # Utilities to export currently installed packages/extensions
 ├── out/                # Output from export scripts
 ├── dwm/                # Submodule: personal dwm build (Arch/X11 only)
@@ -35,6 +37,7 @@ git clone --recurse-submodules git@github.com:hariprasad12994/pc-config.git ~/co
 cd ~/code/pc-config
 bash install.sh          # install packages + oh-my-zsh (one-time; GUI=1 for GUI tools)
 bash stow.sh             # symlink dotfiles into $HOME (GUI=1 to include rofi)
+bash windows-terminal.sh # WSL only: symlink Windows Terminal's settings.json into the repo
 ```
 
 After running, set zsh as default shell:
