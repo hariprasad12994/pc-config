@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
-# Symlinks the repo-tracked Windows Terminal settings.json into place.
+# Deploys the repo-tracked Windows Terminal settings.json to its real path.
 # WSL-only: Windows Terminal's config lives on the Windows filesystem
 # outside $HOME, so it can't go through the regular stow.sh flow.
+#
+# This is a one-way copy, not a symlink: a Windows-side path can't be
+# symlinked to a target inside the WSL-native filesystem (\\wsl.localhost) -
+# the reparse point WSL creates doesn't resolve from the Windows side, even
+# for unsandboxed processes, so Windows Terminal fails to load it ("file
+# cannot be accessed by the system"). Re-run this script after editing the
+# repo copy to deploy; if you edit settings.json via Windows Terminal's
+# Settings UI instead, copy it back into the repo manually to keep it
+# tracked.
 set -e
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -21,14 +30,11 @@ if [ -z "$TARGET" ]; then
     exit 1
 fi
 
-# Compare resolved paths, not just "-e && ! -L": a plain existence/symlink
-# check can't tell "already linked to this repo" from "a real conflicting
-# file", and mv-ing the former corrupts the tracked copy (see the stow.sh
-# fix this mirrors).
-if [ -e "$TARGET" ] && [ "$(readlink -f -- "$TARGET")" != "$(readlink -f -- "$SRC")" ]; then
+if [ -e "$TARGET" ] && ! diff -q "$TARGET" "$SRC" >/dev/null 2>&1; then
     echo "Backing up $TARGET -> $TARGET.bak"
-    mv "$TARGET" "$TARGET.bak"
+    cp "$TARGET" "$TARGET.bak"
 fi
 
-ln -sf "$SRC" "$TARGET"
-echo "Linked $TARGET -> $SRC"
+cp "$SRC" "$TARGET"
+chmod 644 "$TARGET"
+echo "Deployed $SRC -> $TARGET"

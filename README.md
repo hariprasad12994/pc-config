@@ -9,7 +9,7 @@ Uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs into `$HO
 pc-config/
 ├── install.sh          # Bootstrap script — installs packages and oh-my-zsh (one-time)
 ├── stow.sh             # Symlinks dotfiles into $HOME via GNU Stow (run any time)
-├── windows-terminal.sh # WSL only: symlinks Windows Terminal's settings.json into the repo
+├── windows-terminal.sh # WSL only: deploys the repo's Windows Terminal settings.json into place
 ├── packages/
 │   ├── common.txt      # Packages with identical names on Arch and Ubuntu
 │   ├── arch.txt        # Arch/Manjaro-only packages
@@ -37,7 +37,7 @@ git clone --recurse-submodules git@github.com:hariprasad12994/pc-config.git ~/co
 cd ~/code/pc-config
 bash install.sh          # install packages + oh-my-zsh (one-time; GUI=1 for GUI tools)
 bash stow.sh             # symlink dotfiles into $HOME (GUI=1 to include rofi)
-bash windows-terminal.sh # WSL only: symlink Windows Terminal's settings.json into the repo
+bash windows-terminal.sh # WSL only: deploy the repo's Windows Terminal settings.json (rerun after editing it)
 ```
 
 After running, set zsh as default shell:

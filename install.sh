@@ -67,7 +67,7 @@ fi
 echo ""
 echo "Done. Run ./stow.sh to symlink dotfiles."
 if grep -qi microsoft /proc/version 2>/dev/null; then
-    echo "WSL detected - also run ./windows-terminal.sh to symlink Windows Terminal's settings.json."
+    echo "WSL detected - also run ./windows-terminal.sh to deploy Windows Terminal's settings.json."
 fi
 echo "Next steps:"
 echo "  - chsh -s \$(which zsh)"
