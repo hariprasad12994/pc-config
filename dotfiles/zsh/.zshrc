@@ -121,3 +121,6 @@ source ~/tools/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 . "$HOME/.local/bin/env"
+
+# opencode
+export PATH=/home/hari/.opencode/bin:$PATH
