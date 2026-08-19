@@ -124,3 +124,6 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # opencode
 export PATH=/home/hari/.opencode/bin:$PATH
+
+# tmux workspace templates - `ws agent ~/code/foo`, or prefix + N inside tmux
+ws() { ~/.config/tmux/scripts/tmux-workspace.sh "$@"; }
