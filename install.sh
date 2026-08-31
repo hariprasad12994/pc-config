@@ -64,13 +64,23 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
         "" --unattended
 fi
 
-echo ""
-echo "Done. Run ./stow.sh to symlink dotfiles."
+# ── 5. Shell tools .zshrc sources that no package provides ───────────────────
+
+"$REPO_DIR/scripts/install_shell_tools.sh"
+
+# ── 6. Link the dotfiles, and deploy the Windows-side configs on WSL ─────────
+
+"$REPO_DIR/stow.sh"
+
 if grep -qi microsoft /proc/version 2>/dev/null; then
-    echo "WSL detected - also run ./windows-terminal.sh to deploy Windows Terminal's settings.json."
+    "$REPO_DIR/windows-terminal.sh"
+    "$REPO_DIR/vscode.sh"
 fi
-echo "Next steps:"
-echo "  - chsh -s \$(which zsh)"
-echo "  - Install zsh plugins manually:"
-echo "      git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
-echo "      git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+
+echo ""
+echo "Done - packages installed, shell tools fetched, dotfiles linked."
+echo "Next step:"
+echo "  - chsh -s \$(which zsh)   # then log out and back in"
+if grep -qi microsoft /proc/version 2>/dev/null; then
+    echo "  - scripts/vscode_extension_lister.sh / ./vscode.sh --extensions to sync VS Code extensions"
+fi

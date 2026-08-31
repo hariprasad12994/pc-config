@@ -45,14 +45,22 @@ pc-config/
 ```sh
 git clone git@github.com:hariprasad12994/pc-config.git ~/code/pc-config
 cd ~/code/pc-config
-bash install.sh          # install packages + oh-my-zsh (one-time; GUI=1 for GUI tools)
-bash stow.sh             # symlink dotfiles into $HOME (GUI=1 to include rofi)
-bash windows-terminal.sh # WSL only: deploy the repo's Windows Terminal settings.json (rerun after editing it)
-bash vscode.sh           # WSL only: deploy VS Code's settings.json (rerun after editing it)
-bash vscode.sh --extensions # WSL only: reinstall the tracked VS Code extension set
+./install.sh             # GUI=1 to also install GUI packages
 ```
 
-After running, set zsh as default shell:
+`install.sh` now runs the whole bootstrap: distro packages, oh-my-zsh, the
+shell tools `.zshrc` needs, `stow.sh`, and — on WSL — the two Windows-side
+deploy scripts. Re-run the individual pieces any time:
+
+```sh
+./stow.sh                   # re-link dotfiles (GUI=1 to include rofi)
+./windows-terminal.sh       # WSL: redeploy Windows Terminal settings.json
+./vscode.sh                 # WSL: redeploy VS Code settings.json
+./vscode.sh --extensions    # WSL: reinstall the tracked extension set
+scripts/install_shell_tools.sh   # powerlevel10k, zsh-autocomplete, uv
+```
+
+The one manual step left is making zsh the login shell:
 
 ```sh
 chsh -s $(which zsh)
@@ -95,5 +103,11 @@ tracked in the repo, so no dump can go stale.
 ```sh
 scripts/user_installed_package_lister.sh   # explicitly-installed packages (pacman or apt)
 scripts/snap_export.sh                     # installed snaps
-scripts/vscode_extension_lister.sh         # VS Code extensions
+```
+
+The VS Code one is different: it refreshes tracked config rather than printing
+a snapshot, and `vscode.sh --extensions` restores from it.
+
+```sh
+scripts/vscode_extension_lister.sh         # → dotfiles/vscode/extensions.txt
 ```
