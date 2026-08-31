@@ -1,5 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Lists explicitly-installed packages on stdout - redirect it wherever you want
+# the snapshot. Writes nowhere by itself, so there is no tracked dump to go
+# stale the way out/ did.
+set -e
 
-# pacman -Qqe | grep -v "$(awk '{print $1}' /desktopfs-pkgs.txt)" >\
-# ../out/user_installed_packages.txt
-pacman -Qqe > ../out/user_installed_packages.txt
+. /etc/os-release
+
+case "$ID" in
+    arch|manjaro)   pacman -Qqe ;;
+    ubuntu|debian)  apt-mark showmanual ;;
+    *) echo "Unsupported distro: $ID" >&2; exit 1 ;;
+esac

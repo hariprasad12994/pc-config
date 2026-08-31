@@ -34,16 +34,13 @@ pc-config/
 │   ├── taskwarrior/    # → ~/.taskrc
 │   ├── timewarrior/    # → ~/.timewarrior/
 │   └── windows-terminal/ # → Windows Terminal settings.json (WSL only, see windows-terminal.sh)
-├── scripts/            # Utilities to export currently installed packages/extensions
-├── out/                # Output from export scripts
-├── dwm/                # Submodule: personal dwm build (Arch/X11 only)
-└── dmenu/              # Submodule: personal dmenu build (Arch/X11 only)
+└── scripts/            # Utilities to list installed packages/extensions (print to stdout)
 ```
 
 ## Bootstrap a new machine
 
 ```sh
-git clone --recurse-submodules git@github.com:hariprasad12994/pc-config.git ~/code/pc-config
+git clone git@github.com:hariprasad12994/pc-config.git ~/code/pc-config
 cd ~/code/pc-config
 bash install.sh          # install packages + oh-my-zsh (one-time; GUI=1 for GUI tools)
 bash stow.sh             # symlink dotfiles into $HOME (GUI=1 to include rofi)
@@ -89,10 +86,13 @@ Use `stow.sh` for everyday operations, or the raw stow commands below for target
    ```
 3. Add the package name to `CLI_PACKAGES` or `GUI_PACKAGES` in `stow.sh`.
 
-## Exporting current package state
+## Listing current package state
+
+These print to stdout — redirect them wherever you want a snapshot. Nothing is
+tracked in the repo, so no dump can go stale.
 
 ```sh
-bash scripts/user_installed_package_lister.sh   # pacman packages → out/
-bash scripts/snap_export.sh                      # snap packages → out/
-bash scripts/vscode_extension_lister.sh          # VS Code extensions → out/
+scripts/user_installed_package_lister.sh   # explicitly-installed packages (pacman or apt)
+scripts/snap_export.sh                     # installed snaps
+scripts/vscode_extension_lister.sh         # VS Code extensions
 ```

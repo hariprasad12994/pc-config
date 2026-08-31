@@ -1,6 +1,0 @@
-[submodule "dwm"]
-	path = dwm
-	url = git@github.com:hariprasad12994/dwm.git
-[submodule "dmenu"]
-	path = dmenu
-	url = git@github.com:hariprasad12994/dmenu.git
