@@ -2,6 +2,7 @@
 
 # Shell
 zsh
+zsh-syntax-highlighting
 tmux
 
 # Editors

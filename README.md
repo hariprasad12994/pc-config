@@ -36,7 +36,8 @@ pc-config/
 │   ├── taskwarrior/    # → ~/.taskrc
 │   ├── vscode/         # → VS Code settings.json + extension list (WSL only, see vscode.sh)
 │   └── windows-terminal/ # → Windows Terminal settings.json (WSL only, see windows-terminal.sh)
-└── scripts/            # Utilities to list installed packages/extensions (print to stdout)
+└── scripts/            # install_shell_tools.sh, plus utilities that list installed
+                        #   packages/extensions to stdout
 ```
 
 ## Bootstrap a new machine
@@ -57,14 +58,10 @@ After running, set zsh as default shell:
 chsh -s $(which zsh)
 ```
 
-Install oh-my-zsh plugins referenced in `.zshrc`:
-
-```sh
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-    ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-```
+`.zshrc`'s dependencies are handled for you: `zsh-syntax-highlighting` comes
+from the distro package, and `scripts/install_shell_tools.sh` fetches
+powerlevel10k, zsh-autocomplete and uv into `~/tools`. Each is sourced only if
+present, so a partially-installed machine still gets a usable shell.
 
 ## Stow reference
 

@@ -6,10 +6,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=/home/hari/tools/zig:/home/hari/tools/nvim-linux-x86_64/bin:$PATH
+export PATH="$HOME/tools/zig:$HOME/tools/nvim-linux-x86_64/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/hari/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -116,14 +116,27 @@ source $ZSH/oh-my-zsh.sh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source ~/tools/powerlevel10k/powerlevel10k.zsh-theme
-source ~/tools/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Installed by scripts/install_shell_tools.sh, not by a package manager.
+# Guarded so a machine that has not run it yet still gets a usable shell
+# instead of an error on every prompt.
+[ -f ~/tools/powerlevel10k/powerlevel10k.zsh-theme ] \
+    && source ~/tools/powerlevel10k/powerlevel10k.zsh-theme
+[ -f ~/tools/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] \
+    && source ~/tools/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-. "$HOME/.local/bin/env"
+# Distro package, but the two distros disagree on where it lands.
+for _zsh_hl in \
+    /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+    /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; do
+    [ -f "$_zsh_hl" ] && source "$_zsh_hl" && break
+done
+unset _zsh_hl
+
+# uv, installed by scripts/install_shell_tools.sh
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 # opencode
-export PATH=/home/hari/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
 
 # tmux workspace templates - `ws agent ~/code/foo`, or prefix + N inside tmux
 ws() { ~/.config/tmux/scripts/tmux-workspace.sh "$@"; }
