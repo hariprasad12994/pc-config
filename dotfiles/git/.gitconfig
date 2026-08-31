@@ -1,0 +1,8 @@
+[user]
+	email = hariprasad12994@gmail.com
+	name = Hari Prasad Manoharan
+
+# [core], not [ui]: git has no "ui" section, so ui.editor was silently ignored
+# and git fell back to $EDITOR / vi.
+[core]
+	editor = nvim

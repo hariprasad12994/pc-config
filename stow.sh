@@ -4,7 +4,7 @@ set -e
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 DOTFILES_DIR="$REPO_DIR/dotfiles"
 
-CLI_PACKAGES="bash zsh nvim vim tmux taskwarrior timewarrior"
+CLI_PACKAGES="bash git zsh nvim vim tmux taskwarrior"
 GUI_PACKAGES="rofi"
 
 STOW_PACKAGES="$CLI_PACKAGES"

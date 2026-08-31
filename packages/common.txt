@@ -24,6 +24,5 @@ cmake
 gcc
 npm
 
-# Task management
-taskwarrior
-timewarrior
+# Task management lives in arch.txt / ubuntu.txt: Arch names these 'task' and
+# 'timew', so they are not the identically-named packages this file is for.

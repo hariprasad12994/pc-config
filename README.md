@@ -20,19 +20,21 @@ pc-config/
 ├── install.sh          # Bootstrap script — installs packages and oh-my-zsh (one-time)
 ├── stow.sh             # Symlinks dotfiles into $HOME via GNU Stow (run any time)
 ├── windows-terminal.sh # WSL only: deploys the repo's Windows Terminal settings.json into place
+├── vscode.sh           # WSL only: deploys VS Code settings.json; --export pulls it back, --extensions restores them
 ├── packages/
 │   ├── common.txt      # Packages with identical names on Arch and Ubuntu
 │   ├── arch.txt        # Arch/Manjaro-only packages
 │   └── ubuntu.txt      # Ubuntu/Debian-only packages
 ├── dotfiles/           # Config files, one subdirectory per tool (stow packages)
 │   ├── bash/           # → ~/.bashrc, ~/.profile
+│   ├── git/            # → ~/.gitconfig
 │   ├── zsh/            # → ~/.zshrc
 │   ├── nvim/           # → ~/.config/nvim/
 │   ├── vim/            # → ~/.vimrc
 │   ├── tmux/           # → ~/.config/tmux/ (has its own README — keybindings, templates)
 │   ├── rofi/           # → ~/.config/rofi/
 │   ├── taskwarrior/    # → ~/.taskrc
-│   ├── timewarrior/    # → ~/.timewarrior/
+│   ├── vscode/         # → VS Code settings.json + extension list (WSL only, see vscode.sh)
 │   └── windows-terminal/ # → Windows Terminal settings.json (WSL only, see windows-terminal.sh)
 └── scripts/            # Utilities to list installed packages/extensions (print to stdout)
 ```
@@ -45,6 +47,8 @@ cd ~/code/pc-config
 bash install.sh          # install packages + oh-my-zsh (one-time; GUI=1 for GUI tools)
 bash stow.sh             # symlink dotfiles into $HOME (GUI=1 to include rofi)
 bash windows-terminal.sh # WSL only: deploy the repo's Windows Terminal settings.json (rerun after editing it)
+bash vscode.sh           # WSL only: deploy VS Code's settings.json (rerun after editing it)
+bash vscode.sh --extensions # WSL only: reinstall the tracked VS Code extension set
 ```
 
 After running, set zsh as default shell:
@@ -69,7 +73,7 @@ Use `stow.sh` for everyday operations, or the raw stow commands below for target
 | Task | Command |
 |---|---|
 | Stow a single package | `stow --dir=dotfiles --target=$HOME nvim` |
-| Stow all CLI packages | `stow --dir=dotfiles --target=$HOME bash zsh nvim vim tmux taskwarrior timewarrior` |
+| Stow all CLI packages | `stow --dir=dotfiles --target=$HOME bash git zsh nvim vim tmux taskwarrior` |
 | Unstow a package | `stow --dir=dotfiles --target=$HOME -D nvim` |
 | Restow (refresh symlinks) | `stow --dir=dotfiles --target=$HOME -R nvim` |
 | Dry-run (preview changes) | `stow --dir=dotfiles --target=$HOME -n -v nvim` |

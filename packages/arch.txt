@@ -9,3 +9,7 @@ github-cli
 
 # rustup: available in official Arch repos (Ubuntu installs via rustup.rs script)
 rustup
+
+# taskwarrior / timewarrior (Ubuntu spells these 'taskwarrior' / 'timewarrior')
+task
+timew

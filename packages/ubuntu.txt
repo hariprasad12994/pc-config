@@ -6,3 +6,7 @@ gh
 
 # neovim: downloaded from GitHub releases in install.sh (apt version is outdated)
 # rustup: installed via rustup.rs script in install.sh (not in apt repos)
+
+# taskwarrior / timewarrior (Arch spells these 'task' / 'timew')
+taskwarrior
+timewarrior
