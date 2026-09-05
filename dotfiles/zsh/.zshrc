@@ -124,6 +124,23 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/tools/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] \
     && source ~/tools/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
+# zsh-autocomplete binds menu-search and recent-paths before it creates them,
+# and zsh-syntax-highlighting warns about every bound-but-undefined widget it
+# meets while wrapping. Stub those so the wrap is clean and complete;
+# autocomplete's own zle -N / zle -C overwrite the stubs unconditionally during
+# its deferred init, so this only fills the gap between the two.
+#
+# Ordering highlighting before autocomplete also silences the warning, but it
+# then never wraps autocomplete's history widgets, and the recalled line is
+# left unhighlighted on every arrow-key press.
+_pc_stub_widget() { }
+() {
+    local w
+    for w in ${(u)${(f)"$(bindkey)"}##* }; do
+        (( $+widgets[$w] )) || zle -N "$w" _pc_stub_widget
+    done
+}
+
 # Distro package, but the two distros disagree on where it lands.
 for _zsh_hl in \
     /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
