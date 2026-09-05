@@ -127,49 +127,19 @@ if has('gui_running')
     set guifont=Source\ Code\ Pro\ 10
 endif
 
-call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
-" YCM is a plugin with a compiled component. If you update YCM using Vundle and
-" the ycm_core library APIs have changed (happens rarely), YCM will notify you
-" to recompile it. You should then rerun the install process.
-Plug 'https://github.com/ycm-core/YouCompleteMe'
-Plug 'https://github.com/rdnetto/YCM-Generator'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'preservim/nerdtree'
-Plug 'preservim/nerdcommenter'
-Plug 'frazrepo/vim-rainbow'
-Plug 'https://github.com/vim-scripts/taglist.vim'
-Plug 'https://github.com/mileszs/ack.vim'
-Plug 'junegunn/fzf', {'do': { -> fzf#install()}}
-Plug 'junegunn/fzf.vim'
-Plug 'https://github.com/weirongxu/plantuml-previewer.vim'
-Plug 'https://github.com/tyru/open-browser.vim'
-Plug 'https://github.com/aklt/plantuml-syntax'
-Plug 'https://github.com/sainnhe/edge'
-Plug 'https://github.com/arcticicestudio/nord-vim'
-Plug 'flazz/vim-colorschemes'
-Plug 'https://github.com/sirtaj/vim-openscad'
-Plug 'bluz71/vim-nightfly-guicolors'
-call plug#end()
-
-"colorscheme monokai-phoenix
+" No plugins, deliberately. This is the fallback editor, and its whole value is
+" working from a bare vim on any machine: no network, no :PlugInstall, no
+" compile step. Everything the old plugin list provided - completion, a file
+" tree, fuzzy find - lives in the nvim config instead, and the plugin block here
+" only ever meant 23 errors on startup whenever vim-plug was not installed.
 if has('termguicolors')
   set termguicolors
 endif
-let g:edge_style = 'aura'
-let g:edge_better_performance = 1
-colorscheme edge
 set background=dark
 
-" Toggle the nerdtree on hitting Ctrl+E
-map <C-e> :NERDTreeToggle<CR>
-
-" Configure vim rainbow balancer for c, cpp, rust
-au Filetype c,cpp,rs call rainbow#load()
-let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
-
-let g:ycm_clangd_binary_path = "usr/bin/clangd"
+" retrobox ships with vim 9 and is its gruvbox derivative, so the fallback looks
+" like the rest of the setup without pulling anything in.
+colorscheme retrobox
 
 " Macros
 " Initiate a numbered list starting from 1.
