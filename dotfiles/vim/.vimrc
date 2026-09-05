@@ -30,8 +30,11 @@ set smartindent
 set autoindent
 set wrap
 set textwidth=80
-" In case of indentation failure binding a key for full file indentation
-noremap <C-i> gg=G
+" In case of indentation failure, a key for full file indentation.
+" Not <C-i>: that is vim's jump-forward, the counterpart to <C-o>, and it also
+" shares a keycode with <Tab>. nnoremap rather than noremap because gg=G only
+" means anything in normal mode.
+nnoremap <leader>= gg=G
 
 "Display line numbers on the left
 set number
