@@ -10,3 +10,6 @@ gh
 # taskwarrior / timewarrior (Arch spells these 'task' / 'timew')
 taskwarrior
 timewarrior
+
+# Arch's gcc package already includes the C++ compiler
+g++

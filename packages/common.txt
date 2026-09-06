@@ -10,6 +10,10 @@ vim
 
 # CLI utilities
 fzf
+ripgrep
+tig
+unzip
+curl
 ranger
 tree
 htop
