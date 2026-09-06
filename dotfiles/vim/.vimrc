@@ -10,6 +10,9 @@ filetype indent plugin on
 " Enable syntax highlighting
 syntax on
 
+" Leader is space, matching the nvim config
+let mapleader = ' '
+
 " Disable audio bells
 set noerrorbells
 
@@ -19,9 +22,9 @@ set hidden
 
 " Indentation settings for using 4 spaces instead of tabs
 " Do not change 'tabstop' from its default value of 8 with this setup
-set tabstop=4 
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 set smarttab
 
@@ -29,7 +32,21 @@ set smarttab
 set smartindent
 set autoindent
 set wrap
-set textwidth=80
+" Mappings carried over from the nvim config, so muscle memory survives the
+" fallback. Only the ones that need no plugin: window and buffer movement,
+" explicit clipboard yank/put, select-all.
+nnoremap <C-h> :wincmd h<CR>
+nnoremap <C-j> :wincmd j<CR>
+nnoremap <C-k> :wincmd k<CR>
+nnoremap <C-l> :wincmd l<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <leader>a :keepjumps normal! ggVG<CR>
+nnoremap cp "+y
+xnoremap cp "+y
+nnoremap cv "+p
+xnoremap cv "+p
+
 " In case of indentation failure, a key for full file indentation.
 " Not <C-i>: that is vim's jump-forward, the counterpart to <C-o>, and it also
 " shares a keycode with <Tab>. nnoremap rather than noremap because gg=G only
@@ -53,20 +70,6 @@ set pastetoggle=<F11>
 " Enable mouse for all modes
 set mouse=a
 
-" Disable arrow keys in normal mode
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-vnoremap <up> <nop>
-vnoremap <down> <nop>
-vnoremap <left> <nop>
-vnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
 
@@ -89,21 +92,13 @@ set wildmenu
 " Enable highlighted search by default for all the session
 " Disable highlight search option with binding <leader><space>
 set incsearch
-set hlsearch
-nnoremap <leader><space> :nohlsearch<CR>
-
-" Personal remapping.
-" Swap j and k
-nnoremap j k
-nnoremap k j
-vnoremap j k
-vnoremap k j
+set nohlsearch
 
 " Enable pasting from external clipboard
 set clipboard=unnamedplus
 
 " Enable block folding in case of code blocks
-set foldenable
+set nofoldenable
 " Set automatic folding once the nesting is greater than 20
 set foldlevelstart=20
 " todo : Key binding for fold-unfold toggling 
