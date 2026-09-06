@@ -1,0 +1,48 @@
+# Packages installed by install.sh via apt.
+#
+# Ubuntu only. Arch support is deliberately not here: when it comes back it
+# arrives through nix, which has one name per package, rather than through a
+# second list whose naming can never be verified from this machine.
+#
+# Tools that need a pinned version - nvim, rustup, uv, powerlevel10k,
+# zsh-autocomplete - are not apt packages and live in install.sh and
+# scripts/install_shell_tools.sh instead.
+
+# Shell
+zsh
+zsh-syntax-highlighting
+tmux
+
+# Editors
+vim
+
+# CLI utilities
+fzf
+ripgrep
+tig
+unzip
+curl
+ranger
+tree
+htop
+xclip
+wget
+rsync
+stow
+
+# Dev
+git
+make
+cmake
+gcc
+npm
+
+# github CLI
+gh
+
+# C++ compiler (its own apt package, unlike gcc)
+g++
+
+# Task management
+taskwarrior
+timewarrior

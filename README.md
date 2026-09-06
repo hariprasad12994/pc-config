@@ -1,6 +1,6 @@
 # pc-config
 
-Personal dotfiles and bootstrap configuration for Manjaro/Arch and Ubuntu.
+Personal dotfiles and bootstrap configuration for Ubuntu, on WSL or native.
 Uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink configs into `$HOME`.
 
 ## Documentation
@@ -22,10 +22,7 @@ pc-config/
 ├── windows-terminal.sh # WSL only: deploys the repo's Windows Terminal settings.json into place
 ├── vscode.sh           # WSL only: deploys VS Code settings.json; --export pulls it back, --extensions restores them
 ├── fonts.sh            # Installs SauceCodePro Nerd Font (to Windows on WSL, ~/.local/share/fonts otherwise)
-├── packages/
-│   ├── common.txt      # Packages with identical names on Arch and Ubuntu
-│   ├── arch.txt        # Arch/Manjaro-only packages
-│   └── ubuntu.txt      # Ubuntu/Debian-only packages
+├── packages.txt        # The apt package list — one file, Ubuntu only
 ├── dotfiles/           # Config files, one subdirectory per tool (stow packages)
 │   ├── bash/           # → ~/.bashrc, ~/.profile
 │   ├── git/            # → ~/.gitconfig
@@ -103,7 +100,7 @@ These print to stdout — redirect them wherever you want a snapshot. Nothing is
 tracked in the repo, so no dump can go stale.
 
 ```sh
-scripts/user_installed_package_lister.sh   # explicitly-installed packages (pacman or apt)
+scripts/user_installed_package_lister.sh   # explicitly-installed apt packages
 scripts/snap_export.sh                     # installed snaps
 ```
 
