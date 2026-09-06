@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# Installs SauceCodePro Nerd Font - the face Windows Terminal's settings.json
+# names, and the one powerlevel10k needs for its prompt glyphs. Without it the
+# prompt renders as boxes and question marks.
+#
+# On WSL the font must go to Windows, not Linux: Windows Terminal and VS Code
+# are Windows processes and never look at ~/.local/share/fonts. Installing
+# per-user avoids needing admin, but then dropping the .ttf into the folder is
+# not enough on its own - Windows only finds it once it is registered under
+# HKCU, which is what the powershell call below does.
+set -e
+
+FONT_ZIP_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/SourceCodePro.zip"
+MARKER="SauceCodeProNerdFont-Regular.ttf"
+
+is_wsl() { grep -qi microsoft /proc/version 2>/dev/null; }
+
+fetch_fonts() {
+    local dest="$1"
+    command -v curl >/dev/null || { echo "curl is required." >&2; exit 1; }
+    command -v unzip >/dev/null || { echo "unzip is required." >&2; exit 1; }
+    echo "Downloading SauceCodePro Nerd Font"
+    curl -fsSL "$FONT_ZIP_URL" -o "$dest/fonts.zip"
+    unzip -qo "$dest/fonts.zip" -d "$dest" '*.ttf'
+    rm -f "$dest/fonts.zip"
+}
+
+if is_wsl; then
+    FONT_DIR="$(find /mnt/c/Users -maxdepth 6 -type d \
+        -ipath '*AppData/Local/Microsoft/Windows/Fonts' 2>/dev/null | head -1)"
+    if [ -z "$FONT_DIR" ]; then
+        echo "Could not find the Windows per-user font directory." >&2
+        exit 1
+    fi
+
+    if [ -f "$FONT_DIR/$MARKER" ]; then
+        echo "SauceCodePro Nerd Font already installed in Windows."
+        exit 0
+    fi
+
+    tmp="$(mktemp -d)"
+    trap 'rm -rf "$tmp"' EXIT
+    fetch_fonts "$tmp"
+
+    for ttf in "$tmp"/*.ttf; do
+        base="$(basename "$ttf")"
+        cp -f "$ttf" "$FONT_DIR/$base"
+        win_path="$(wslpath -w "$FONT_DIR/$base")"
+        name="${base%.ttf}"
+        powershell.exe -NoProfile -Command \
+            "New-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' \
+             -Name '$name (TrueType)' -Value '$win_path' -PropertyType String -Force | Out-Null" \
+            >/dev/null 2>&1 || echo "  warning: could not register $base" >&2
+        echo "  installed $base"
+    done
+    echo "Done. Restart Windows Terminal to pick the font up."
+else
+    FONT_DIR="$HOME/.local/share/fonts/SauceCodePro"
+    if [ -f "$FONT_DIR/$MARKER" ]; then
+        echo "SauceCodePro Nerd Font already installed."
+        exit 0
+    fi
+    mkdir -p "$FONT_DIR"
+    fetch_fonts "$FONT_DIR"
+    command -v fc-cache >/dev/null && fc-cache -f "$FONT_DIR" >/dev/null
+    echo "Installed into $FONT_DIR"
+fi

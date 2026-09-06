@@ -21,6 +21,7 @@ pc-config/
 ├── stow.sh             # Symlinks dotfiles into $HOME via GNU Stow (run any time)
 ├── windows-terminal.sh # WSL only: deploys the repo's Windows Terminal settings.json into place
 ├── vscode.sh           # WSL only: deploys VS Code settings.json; --export pulls it back, --extensions restores them
+├── fonts.sh            # Installs SauceCodePro Nerd Font (to Windows on WSL, ~/.local/share/fonts otherwise)
 ├── packages/
 │   ├── common.txt      # Packages with identical names on Arch and Ubuntu
 │   ├── arch.txt        # Arch/Manjaro-only packages
@@ -49,11 +50,12 @@ cd ~/code/pc-config
 ```
 
 `install.sh` now runs the whole bootstrap: distro packages, oh-my-zsh, the
-shell tools `.zshrc` needs, `stow.sh`, and — on WSL — the two Windows-side
-deploy scripts. Re-run the individual pieces any time:
+shell tools `.zshrc` needs, the prompt font, `stow.sh`, and — on WSL — the two
+Windows-side deploy scripts. Re-run the individual pieces any time:
 
 ```sh
 ./stow.sh                   # re-link dotfiles (GUI=1 to include rofi)
+./fonts.sh                  # install the prompt font
 ./windows-terminal.sh       # WSL: redeploy Windows Terminal settings.json
 ./vscode.sh                 # WSL: redeploy VS Code settings.json
 ./vscode.sh --extensions    # WSL: reinstall the tracked extension set

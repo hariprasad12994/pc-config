@@ -68,7 +68,11 @@ fi
 
 "$REPO_DIR/scripts/install_shell_tools.sh"
 
-# ── 6. Link the dotfiles, and deploy the Windows-side configs on WSL ─────────
+# ── 6. The prompt font, or powerlevel10k renders as boxes ────────────────────
+
+"$REPO_DIR/fonts.sh"
+
+# ── 7. Link the dotfiles, and deploy the Windows-side configs on WSL ─────────
 
 "$REPO_DIR/stow.sh"
 
