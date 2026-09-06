@@ -1,4 +1,4 @@
-vim.g.loaded_netrw = a
+vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.netrw_banner = 0
 vim.g.mapleader = ' '
@@ -24,7 +24,7 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
-vim.opt.background = dark
+vim.opt.background = "dark"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.mouse = 'a'

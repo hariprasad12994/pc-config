@@ -1,9 +1,9 @@
-vim.keymap.set('n', '<leader>s', ':source $MYVIMR<cr>', {})
+vim.keymap.set('n', '<leader>s', ':source $MYVIMRC<cr>', {})
 -- select all
 vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', {})
 vim.keymap.set({'n', 'x'}, 'cp', '"+y', {})
 vim.keymap.set({'n', 'x'}, 'cv', '"+p', {})
-vim.keymap.set({'n', 'x', 'v'}, '<leader>l', ':set inrelativenumber<cr>', { noremap = true })
+vim.keymap.set({'n', 'x', 'v'}, '<leader>l', ':set invrelativenumber<cr>', { noremap = true })
 vim.keymap.set('n', '<Tab>', ':bnext<cr>', {})
 vim.keymap.set('n', '<S-Tab>', ':bprevious<cr>', {})
 vim.keymap.set('n', '<C-k>', ':wincmd k<cr>', {})
