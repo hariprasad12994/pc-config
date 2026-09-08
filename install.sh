@@ -53,16 +53,25 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
         "" --unattended
 fi
 
-"$REPO_DIR/scripts/install_shell_tools.sh"
-"$REPO_DIR/fonts.sh"
-
-# ── 3. Link the dotfiles, and deploy the Windows-side configs on WSL ─────────
+# ── 3. Link the dotfiles ─────────────────────────────────────────────────────
+#
+# Before the network-dependent extras below, and they are non-fatal, because a
+# font download failing must not leave you with no dotfiles. set -e plus a chain
+# of downloads previously meant any one of them aborted the whole bootstrap.
 
 "$REPO_DIR/stow.sh"
 
+# ── 4. Extras: nice to have, never fatal ─────────────────────────────────────
+
+"$REPO_DIR/scripts/install_shell_tools.sh" \
+    || echo "warning: shell tools failed; the prompt will fall back" >&2
+
+"$REPO_DIR/fonts.sh" \
+    || echo "warning: font install failed; prompt glyphs may render as boxes" >&2
+
 if is_wsl; then
-    "$REPO_DIR/windows-terminal.sh"
-    "$REPO_DIR/vscode.sh"
+    "$REPO_DIR/windows-terminal.sh" || echo "warning: Windows Terminal deploy failed" >&2
+    "$REPO_DIR/vscode.sh"           || echo "warning: VS Code deploy failed" >&2
 fi
 
 echo ""
