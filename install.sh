@@ -3,6 +3,11 @@ set -e
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+# /proc/version is not usable for this: a container running on WSL sees the
+# host's Microsoft kernel there and wrongly concludes it is WSL. wslpath and
+# /mnt/c are the capabilities the Windows-side scripts actually need.
+is_wsl() { command -v wslpath >/dev/null 2>&1 && [ -d /mnt/c ]; }
+
 # ── 1. Distro packages ───────────────────────────────────────────────────────
 #
 # Ubuntu only, deliberately. The previous arch/ubuntu split cost 53 of this
@@ -55,7 +60,7 @@ fi
 
 "$REPO_DIR/stow.sh"
 
-if grep -qi microsoft /proc/version 2>/dev/null; then
+if is_wsl; then
     "$REPO_DIR/windows-terminal.sh"
     "$REPO_DIR/vscode.sh"
 fi
@@ -64,6 +69,6 @@ echo ""
 echo "Done - packages installed, tools fetched, dotfiles linked."
 echo "Next step:"
 echo "  - chsh -s \$(which zsh)   # then log out and back in"
-if grep -qi microsoft /proc/version 2>/dev/null; then
+if is_wsl; then
     echo "  - ./vscode.sh --extensions to restore the tracked VS Code extension set"
 fi

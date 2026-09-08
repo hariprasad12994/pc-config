@@ -13,7 +13,10 @@ set -e
 FONT_ZIP_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/SourceCodePro.zip"
 MARKER="SauceCodeProNerdFont-Regular.ttf"
 
-is_wsl() { grep -qi microsoft /proc/version 2>/dev/null; }
+# WSL detection: /proc/version is not usable for this, because a container
+# running on WSL sees the host's Microsoft kernel there and wrongly concludes it
+# is WSL. wslpath and /mnt/c are the capabilities these scripts actually need.
+is_wsl() { command -v wslpath >/dev/null 2>&1 && [ -d /mnt/c ]; }
 
 fetch_fonts() {
     local dest="$1"

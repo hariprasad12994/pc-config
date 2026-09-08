@@ -16,7 +16,12 @@ set -e
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 SRC="$REPO_DIR/dotfiles/windows-terminal/settings.json"
 
-if ! grep -qi microsoft /proc/version 2>/dev/null; then
+# WSL detection: /proc/version is not usable for this, because a container
+# running on WSL sees the host's Microsoft kernel there and wrongly concludes it
+# is WSL. wslpath and /mnt/c are the capabilities these scripts actually need.
+is_wsl() { command -v wslpath >/dev/null 2>&1 && [ -d /mnt/c ]; }
+
+if ! is_wsl; then
     echo "Not running under WSL, skipping." >&2
     exit 0
 fi
