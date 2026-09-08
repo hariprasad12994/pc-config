@@ -22,6 +22,7 @@ pc-config/
 ├── windows-terminal.sh # WSL only: deploys the repo's Windows Terminal settings.json into place
 ├── vscode.sh           # WSL only: deploys VS Code settings.json; --export pulls it back, --extensions restores them
 ├── fonts.sh            # Installs SauceCodePro Nerd Font (to Windows on WSL, ~/.local/share/fonts otherwise)
+├── doctor.sh           # Reports where this machine diverges from what the repo declares
 ├── packages.txt        # The apt package list — one file, Ubuntu only
 ├── dotfiles/           # Config files, one subdirectory per tool (stow packages)
 │   ├── bash/           # → ~/.bashrc, ~/.profile
@@ -53,6 +54,7 @@ Windows-side deploy scripts. Re-run the individual pieces any time:
 ```sh
 ./stow.sh                   # re-link dotfiles (GUI=1 to include rofi)
 ./fonts.sh                  # install the prompt font
+./doctor.sh                 # check this machine against what the repo declares
 ./windows-terminal.sh       # WSL: redeploy Windows Terminal settings.json
 ./vscode.sh                 # WSL: redeploy VS Code settings.json
 ./vscode.sh --extensions    # WSL: reinstall the tracked extension set
