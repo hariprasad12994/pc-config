@@ -29,7 +29,11 @@ for pkg in $STOW_PACKAGES; do
         fi
     done < <(find "$pkg_dir" -type f -print0)
 
-    stow --dir="$DOTFILES_DIR" --target="$HOME" "$pkg"
+    # --restow, not plain stow: stow never removes a link whose target has
+    # gone, so deleting a tracked file leaves a dangling symlink in $HOME that
+    # nothing complains about. That is exactly how ~/.config/nvim ended up
+    # pointing at an init_bkp.lua and a plugin/ that no longer exist.
+    stow --dir="$DOTFILES_DIR" --target="$HOME" --restow "$pkg"
 done
 
 echo "Done."
