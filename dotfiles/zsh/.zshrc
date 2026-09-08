@@ -82,7 +82,9 @@ export ZSH="$HOME/.oh-my-zsh"
 #     zsh-autosuggestions
 #     zsh-syntax-highlighting
 #   )
-source $ZSH/oh-my-zsh.sh
+# Guarded for the same reason as the sources further down: a partially
+# provisioned machine should degrade, not error on every prompt.
+[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
