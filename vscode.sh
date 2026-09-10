@@ -45,7 +45,12 @@ if [ "$mode" = extensions ]; then
     exit 0
 fi
 
-TARGET_DIR="$(find /mnt/c/Users -maxdepth 6 -type d -ipath '*AppData/Roaming/Code/User' 2>/dev/null | head -1)"
+# glob rather than find: a recursive find on the 9p /mnt/c mount takes tens of
+# seconds, against a tenth of a second for this.
+TARGET_DIR=""
+for d in /mnt/c/Users/*/AppData/Roaming/Code/User; do
+    [ -d "$d" ] && { TARGET_DIR="$d"; break; }
+done
 if [ -z "$TARGET_DIR" ]; then
     echo "Could not find VS Code's User directory under /mnt/c/Users." >&2
     exit 1

@@ -29,8 +29,12 @@ fetch_fonts() {
 }
 
 if is_wsl; then
-    FONT_DIR="$(find /mnt/c/Users -maxdepth 6 -type d \
-        -ipath '*AppData/Local/Microsoft/Windows/Fonts' 2>/dev/null | head -1)"
+    # glob rather than find: /mnt/c is a 9p mount where a recursive find under
+    # C:\Users takes tens of seconds, against a tenth of a second for this.
+    FONT_DIR=""
+    for d in /mnt/c/Users/*/AppData/Local/Microsoft/Windows/Fonts; do
+        [ -d "$d" ] && { FONT_DIR="$d"; break; }
+    done
     if [ -z "$FONT_DIR" ]; then
         echo "Could not find the Windows per-user font directory." >&2
         exit 1

@@ -10,6 +10,9 @@
 # into nothing for months; ~/.timewarrior left dangling at a deleted directory;
 # .zshrc sourcing four things nothing installed.
 
+# Windows paths are found by glob, not by find: /mnt/c is a 9p mount, and a
+# recursive find under C:\Users takes 17-58 seconds there against 0.1s for a
+# glob anchored to the layout Windows fixes anyway.
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 is_wsl() { command -v wslpath >/dev/null 2>&1 && [ -d /mnt/c ]; }
 
@@ -50,7 +53,10 @@ check_path "$HOME/tools/zsh-autocomplete" zsh-autocomplete "scripts/install_shel
 check_path "$HOME/.oh-my-zsh"             oh-my-zsh        "install.sh"
 
 if is_wsl; then
-    fdir="$(find /mnt/c/Users -maxdepth 6 -type d -ipath '*AppData/Local/Microsoft/Windows/Fonts' 2>/dev/null | head -1)"
+    fdir=""
+    for d in /mnt/c/Users/*/AppData/Local/Microsoft/Windows/Fonts; do
+        [ -d "$d" ] && { fdir="$d"; break; }
+    done
     if [ -n "$fdir" ] && [ -f "$fdir/SauceCodeProNerdFont-Regular.ttf" ]; then
         ok "nerd font" "installed in Windows"
     else
@@ -108,8 +114,10 @@ if [ -z "$broken" ]; then ok "no dangling links"; else bad "dangling links" "$(e
 
 if is_wsl; then
     section "windows-side deploys in sync"
-    wt="$(find /mnt/c/Users -maxdepth 8 -iname settings.json \
-        \( -ipath '*Packages/Microsoft.WindowsTerminal_*' -o -ipath '*Microsoft/Windows Terminal*' \) 2>/dev/null | head -1)"
+    wt=""
+    for f in /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json; do
+        [ -f "$f" ] && { wt="$f"; break; }
+    done
     if [ -z "$wt" ]; then
         warn "windows terminal" "settings.json not found on the Windows side"
     elif diff -q "$wt" "$REPO_DIR/dotfiles/windows-terminal/settings.json" >/dev/null 2>&1; then
@@ -118,8 +126,11 @@ if is_wsl; then
         warn "windows terminal" "differs from the repo copy - ./windows-terminal.sh to redeploy"
     fi
 
-    vs="$(find /mnt/c/Users -maxdepth 6 -type d -ipath '*AppData/Roaming/Code/User' 2>/dev/null | head -1)/settings.json"
-    if [ ! -f "$vs" ]; then
+    vs=""
+    for f in /mnt/c/Users/*/AppData/Roaming/Code/User/settings.json; do
+        [ -f "$f" ] && { vs="$f"; break; }
+    done
+    if [ -z "$vs" ]; then
         warn "vs code" "settings.json not found on the Windows side"
     elif diff -q "$vs" "$REPO_DIR/dotfiles/vscode/settings.json" >/dev/null 2>&1; then
         ok "vs code"

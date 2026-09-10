@@ -26,9 +26,12 @@ if ! is_wsl; then
     exit 0
 fi
 
-TARGET="$(find /mnt/c/Users -maxdepth 8 -iname settings.json \
-    \( -ipath "*Packages/Microsoft.WindowsTerminal_*" -o -ipath "*Microsoft/Windows Terminal*" \) \
-    2>/dev/null | head -1)"
+# glob rather than find: a recursive find on the 9p /mnt/c mount takes tens of
+# seconds, against a tenth of a second for this.
+TARGET=""
+for f in /mnt/c/Users/*/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json; do
+    [ -f "$f" ] && { TARGET="$f"; break; }
+done
 
 if [ -z "$TARGET" ]; then
     echo "Could not find Windows Terminal's settings.json under /mnt/c/Users." >&2
